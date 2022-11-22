@@ -16,6 +16,12 @@ VALUES (
     '2022-09-20 14:00:00'
 );
 
+-- SELECT *
+-- FROM Orders
+-- ORDER BY OrderID DESC
+-- LIMIT 1;
+
+
 INSERT INTO OrdersDishes (OrderID, DishID)
 SELECT o.OrderID, d.DishID
 FROM 
@@ -27,20 +33,23 @@ FROM
         WHERE FirstName = 'Loretta'
         AND Address LIKE '6939 Elka%')
       AND OrderDate = '2022-09-20 14:00:00') AS o
-CROSS JOIN
+    CROSS JOIN
     (SELECT DishID
       FROM Dishes
       WHERE Name IN ('House Salad', 'Mini Cheeseburgers',
         'Tropical Blue Smoothie')
-    ) AS d
+    ) AS d;
 
-Select o.OrderID, SUM(Price) as Total
-FROM Orders AS o
-INNER JOIN OrdersDishes AS od
-ON o.OrderID = od.OrderID
+-- SELECT *
+-- FROM OrdersDishes
+-- WHERE OrderID = 1001;
+
+
+SELECT od.OrderID, SUM(Price) as Total
+FROM OrdersDishes AS od
 INNER JOIN Dishes AS d
 ON od.DishID = d.DishID
-WHERE o.OrderID = (
+WHERE od.OrderID = (
     SELECT OrderID
     FROM Orders
     WHERE CustomerID = (
@@ -49,4 +58,4 @@ WHERE o.OrderID = (
       WHERE FirstName = 'Loretta'
       AND Address LIKE '6939 Elka%')
     AND OrderDate = '2022-09-20 14:00:00')
-GROUP BY o.OrderID;
+GROUP BY od.OrderID;
