@@ -2,15 +2,6 @@
 
 -- Make a pick list of books published from 1890-1899 
 -- which are not currently checked out.
--- If has been  returned at least once
--- SELECT Title, Barcode, ReturnedDate
--- FROM Books
--- INNER JOIN Loans ON Books.BookID = Loans.BookID
--- WHERE Published BETWEEN 1890 AND 1899
--- AND ReturnedDate IS NOT NULL
--- GROUP BY Books.BookID
--- ORDER BY Title;
-
 SELECT Title, Barcode
 FROM Books
 WHERE Published BETWEEN 1890 AND 1899
@@ -19,3 +10,15 @@ AND (BookID NOT IN (
       FROM Loans
       WHERE ReturnedDate IS NULL))
 ORDER BY Title;
+
+
+-- If has been  returned at least once
+
+-- SELECT Title, Barcode, ReturnedDate
+-- FROM Books
+-- INNER JOIN Loans ON Books.BookID = Loans.BookID
+-- WHERE Published BETWEEN 1890 AND 1899
+-- AND ReturnedDate IS NOT NULL
+-- GROUP BY Books.BookID
+-- ORDER BY Title;
+

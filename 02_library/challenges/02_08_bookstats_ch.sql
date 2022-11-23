@@ -11,9 +11,9 @@ ORDER BY TitleCount DESC;
 
 -- Report 2: Show the five books that have been
 -- checked out the most.
-SELECT Title, COUNT(Loans.LoanID) AS LoanCount
+SELECT Title, COUNT(*) AS LoanCount
 FROM Books 
 INNER JOIN Loans ON Books.BookID = Loans.BookID
-GROUP BY Books.Title
-ORDER BY CountBooks DESC
+GROUP BY Title
+ORDER BY LoanCount DESC
 LIMIT 5;
